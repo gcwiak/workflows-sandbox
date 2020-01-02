@@ -1,28 +1,18 @@
-name: Backport pull request
+name: Backport - tibdex
 
 on:
-  push:
-    branches:
-    - master
   pull_request:
-    branches:
-    - master
+    types:
+      - closed
+      - labeled
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  backport:
+    runs-on: ubuntu-18.04
+    name: Backport
     steps:
-    - uses: actions/checkout@v1
-    - name: pull-request
-      uses: repo-sync/pull-request@v2
-      with:
-        source_branch: "master"
-        destination_branch: "backport-target"
-        pr_title: "Pulling ${{ github.ref }} into backport-target"
-        pr_body: ":crown: *An automated PR*"
-        pr_reviewer: "gcwiak"
-        pr_assignee: "gcwiak"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        
+      - name: Backport
+        uses: tibdex/backport@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
