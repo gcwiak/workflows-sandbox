@@ -19,8 +19,8 @@ jobs:
       with:
         source_branch: "master"
         destination_branch: "backport-target"
-        pr_title: "Pulling ${{ github.ref }} into backport-target"
-        pr_body: ":crown: *An automated PR*. github.sha: ${{ github.sha }}. github.ref: ${{ github.ref }}. github.head_ref: ${{ github.head_ref }}. github.base_ref: ${{ github.base_ref }}. github.event: ${{ toJson(github.event) }}. github: ${{ toJson(github) }}."
+        pr_title: "BACKPORT: #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
+        pr_body: ":leftwards_arrow_with_hook: **An automated backport PR**. Backporting ${{ github.event.pull_request.html_url }}"
         pr_reviewer: "gcwiak"
         pr_assignee: "gcwiak"
         github_token: ${{ secrets.GITHUB_TOKEN }}
