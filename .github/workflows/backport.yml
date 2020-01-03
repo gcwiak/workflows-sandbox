@@ -21,6 +21,6 @@ jobs:
         destination_branch: "backport-target"
         pr_title: "BACKPORT: #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
         pr_body: ":leftwards_arrow_with_hook: **An automated backport PR**. Backporting ${{ github.event.pull_request.html_url }}"
-        pr_reviewer: "gcwiak"
-        pr_assignee: "gcwiak"
+        pr_reviewer: "${{ github.event.pull_request.requested_reviewers }}"
+        pr_assignee: "${{ github.event.pull_request.assignee }}"
         github_token: ${{ secrets.GITHUB_TOKEN }}
