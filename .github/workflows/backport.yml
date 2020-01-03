@@ -17,10 +17,10 @@ jobs:
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        source_branch: "${{ github.event.pull_request.head.ref }}"
+        source_branch: "${{ github.event.pull_request.head.label }}"
         destination_branch: "backport-target-3"
         pr_title: "BACKPORT: #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
-        pr_body: ":leftwards_arrow_with_hook: **An automated backport PR**. Backporting ${{ github.event.pull_request.html_url }}. GITHIB_CONTEXT: ${{ toJson(github) }}."
+        pr_body: ":leftwards_arrow_with_hook: **An automated backport PR**. Backporting ${{ github.event.pull_request.html_url }}."
         pr_reviewer: "${{ github.event.pull_request.merged_by.login }}"
         pr_assignee: "${{ github.event.pull_request.merged_by.login }}"
         github_token: ${{ secrets.GITHUB_TOKEN }}
