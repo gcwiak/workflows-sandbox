@@ -27,7 +27,7 @@ git remote set-url origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHU
 git fetch origin '+refs/heads/*:refs/heads/*'
 
 
-if [ "$INPUT_SOURCE_REPO" != "$INPUT_DESTINATION_REPO"]; then 
+if [ "$INPUT_SOURCE_REPO" != "$INPUT_DESTINATION_REPO" ]; then 
   echo "Source branch from different repository, fetching." 
   # TODO more reliable checks that source is actually fork of the destination
   VALIDATION_PREFIX="${INPUT_SOURCE_OWNER}/"
