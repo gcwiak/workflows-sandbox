@@ -17,7 +17,7 @@ jobs:
     - name: pull-request
       uses: ./.github/actions/pull-request
       with:
-        source_branch: "${{ github.event.pull_request.head.label }}"
+        source_branch: "${{ github.event.pull_request.head.ref }}"
         source_repo: "${{ github.event.pull_request.head.repo.clone_url }}"
         source_owner: "${{ github.event.pull_request.head.repo.owner.login }}"
         destination_branch: "backport-target-3"
