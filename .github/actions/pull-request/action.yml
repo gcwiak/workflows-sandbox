@@ -6,12 +6,21 @@ branding:
   color: 'black'
 inputs:
   source_branch:
-    description: Branch name to pull from, default is triggered branch
-    required: false
+    description: Branch name to pull from
+    required: true
+  source_repo:
+    description: Source repository url
+    required: true
+  source_owner:
+    description: Owner of the source repository
+    required: true
   destination_branch:
     description: Branch name to sync to in this repo, default is master
     required: false
     default: master
+  destination_repo:
+    description: Destination repository url
+    required: true
   pr_title:
     description: Pull request title
     required: false
