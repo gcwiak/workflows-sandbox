@@ -49,6 +49,10 @@ create_pull_request() {
     #TARGET  # pull request TO this target
     #BODY    # this is the content of the message
     #TITLE   # pull request title
+    SOURCE="${SOURCE}"
+    TARGET="${TARGET}"
+    BODY="${BODY}"
+    TITLE="${TITLE}"
 
     # if PRs are draft
     DRAFT="false"
