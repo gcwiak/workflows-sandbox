@@ -1,2 +1,3 @@
 auto sample 1
+auto sample 2
 
