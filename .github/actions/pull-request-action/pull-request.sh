@@ -49,17 +49,13 @@ create_pull_request() {
     #TARGET  # pull request TO this target
     #BODY    # this is the content of the message
     #TITLE   # pull request title
-    SOURCE="${SOURCE}"
-    TARGET="${TARGET}"
-    BODY="${BODY}"
-    TITLE="${TITLE}"
 
     # if PRs are draft
     DRAFT="false"
 
     # Check if the branch already has a pull request open
 
-    DATA="{\"base\":${TARGET}, \"head\":${SOURCE}, \"body\":${BODY}}"
+    DATA="{\"base\":\"${TARGET}\", \"head\":\"${SOURCE}\", \"body\":\"${BODY}\"}"
     RESPONSE=$(curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --user "${GITHUB_ACTOR}" -X GET --data "${DATA}" ${PULLS_URL})
     PR=$(echo "${RESPONSE}" | jq --raw-output '.[] | .head.ref')
     echo "Response ref: ${PR}"
@@ -71,7 +67,7 @@ create_pull_request() {
     # Option 2: Open a new pull request
     else
         # Post the pull request
-        DATA="{\"title\":${TITLE}, \"body\":${BODY}, \"base\":${TARGET}, \"head\":${SOURCE}, \"draft\":${DRAFT}}"
+        DATA="{\"title\":\"${TITLE}\", \"body\":\"${BODY}\", \"base\":\"${TARGET}\", \"head\":\"${SOURCE}\", \"draft\":\"${DRAFT}\"}"
         echo "curl --user ${GITHUB_ACTOR} -X POST --data ${DATA} ${PULLS_URL}"
         curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --user "${GITHUB_ACTOR}" -X POST --data "${DATA}" ${PULLS_URL}
         echo $?
