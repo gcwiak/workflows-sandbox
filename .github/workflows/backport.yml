@@ -16,7 +16,7 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
     - uses: actions/checkout@v2
-     run: |
+      run: |
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
     - name: pull-request
       uses: ./.github/actions/pull-request
