@@ -12,6 +12,7 @@ jobs:
     name: PullRequestAction
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: pull-request-action
         uses: ./.github/actions/pull-request-action
         env:
