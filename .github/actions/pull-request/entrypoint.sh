@@ -2,7 +2,9 @@
 
 set -e
 
-echo "Internal pull-request action"
+echo "===> Internal pull-request action"
+HUB_VERBOSE="true"
+hub --version
 
 if [[ -z "$GITHUB_TOKEN" ]]; then
   echo "Set the GITHUB_TOKEN environment variable."
