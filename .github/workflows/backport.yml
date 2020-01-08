@@ -1,9 +1,11 @@
 name: Backport pull request
 
 on:
-  push:
-    branches-ignore:
-      - master
+  pull_request:
+    branches:
+    - master
+    types:
+    - closed
 
 jobs:
   auto-pull-request:
@@ -11,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: pull-request-action
-        uses: vsoch/pull-request-action@1.0.1
+        uses: ./.github/actions/pull-request-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_PREFIX: "auto-pr/"
-          PULL_REQUEST_BRANCH: "auto-pr-target"
+          SOURCE: ${{ github.event.pull_request.head.label }}
+          TARGET: "auto-pr-target"
+          BODY: "AUTO BACKPORT PR: From #${{ github.event.pull_request.number }}"
+          TITLE: "BACKPORTING PR #${{ github.event.pull_request.number }}"
