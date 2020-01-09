@@ -8,16 +8,17 @@ on:
     - closed
 
 jobs:
-  auto-pull-request:
-    name: PullRequestAction
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: pull-request-action
-        uses: ./.github/actions/pull-request-action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SOURCE: ${{ github.event.pull_request.head.label }}
-          TARGET: "auto-pr-target"
-          BODY: "AUTO BACKPORT PR: From #${{ github.event.pull_request.number }}"
-          TITLE: "BACKPORTING PR #${{ github.event.pull_request.number }}"
+    - uses: actions/checkout@v1
+    - name: pull-request
+      uses: repo-sync/pull-request@v2.0.1
+      with:
+        source_branch: "${{ github.event.pull_request.head.ref }}"
+        destination_branch: "backport-target-3"
+        pr_title: "[Backport]: #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
+        pr_body: ":leftwards_arrow_with_hook: **An automated backport PR**. Backporting pull request ${{ github.event.pull_request.html_url }}."
+        pr_reviewer: "${{ github.event.pull_request.merged_by.login }}"
+        pr_assignee: "${{ github.event.pull_request.merged_by.login }}"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
