@@ -12,7 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: pull-request
+    - name: Check preconditions
+      run: |
+        echo "Validating"
+        exit 1
+    - name: Create pull request
       uses: repo-sync/pull-request@v2.0.1
       with:
         source_branch: "${{ github.event.pull_request.head.ref }}"
