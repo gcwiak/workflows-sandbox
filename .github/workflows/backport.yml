@@ -24,7 +24,7 @@ jobs:
         source_branch: "${{ github.event.pull_request.head.ref }}"
         destination_branch: "backport-target-3"
         pr_title: "[Backport]: #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
-        pr_body: ":leftwards_arrow_with_hook: **An automated sync PR**. Synchronizing [backport-target-3](/gcwiak/workflows-sandbox/tree/backport-target-3) branch with changes on [master](/gcwiak/workflows-sandbox/tree/master) introduced by PR ${{ github.event.pull_request.html_url }}."
+        pr_body: ":leftwards_arrow_with_hook: **An automated sync PR**. Synchronizing [backport-target-3](${{ github.event.pull_request.base.repo.html_url }}/tree/backport-target-3) branch with changes on [master](${{ github.event.pull_request.base.repo.html_url }}/tree/master) introduced by PR ${{ github.event.pull_request.html_url }}."
         pr_reviewer: "${{ github.event.pull_request.merged_by.login }}"
         pr_assignee: "${{ github.event.pull_request.merged_by.login }}"
         github_token: ${{ secrets.GITHUB_TOKEN }}
