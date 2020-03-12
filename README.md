@@ -39,3 +39,5 @@ Updated text for readme - from branch readme-update-16
 ##### New sample change 2
 
 Updated text for readme - from branch readme-update-A2
+
+Dummy change.
