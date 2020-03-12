@@ -14,9 +14,8 @@ jobs:
       - name: Get tag name
         id: get_tag
         run: echo ::set-output name=NAME::${GITHUB_REF/refs\/tags\//}
-      - name: Checkout code
+      - name: Checkout code # This already switches to the tag invoking the workflow.
         uses: actions/checkout@v2
-      - run: git status
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
           zip -r artifact-${{ steps.get_tag.outputs.NAME }}.zip docs
