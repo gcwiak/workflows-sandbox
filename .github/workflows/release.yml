@@ -11,20 +11,22 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
+      - name: Save tag name
+        run: echo ::set-env name=TAG_NAME::${GITHUB_REF/refs\/tags\//}
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
-          zip -r artifact-${GITHUB_REF/refs\/tags\//}.zip docs
+          zip -r artifact-${TAG_NAME}.zip docs
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${GITHUB_REF/refs\/tags\//}
-          release_name: Release ${GITHUB_REF/refs\/tags\//}
-          body: Description of the release ${GITHUB_REF/refs\/tags\//}
+          tag_name: ${TAG_NAME}
+          release_name: Release ${TAG_NAME}
+          body: Description of the release ${TAG_NAME}
           draft: true
           prerelease: false
       - name: Upload Release Asset
@@ -34,6 +36,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./artifact-${GITHUB_REF/refs\/tags\//}.zip
-          asset_name: artifact-${GITHUB_REF/refs\/tags\//}.zip
+          asset_path: ./artifact-${TAG_NAME}.zip
+          asset_name: artifact-${TAG_NAME}.zip
           asset_content_type: application/zip
